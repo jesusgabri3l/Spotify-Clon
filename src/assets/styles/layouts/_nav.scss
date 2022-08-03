@@ -1,0 +1,22 @@
+.navigator {
+    background-color: $COMPLEMENT-COLOR;
+    &__list{
+      @media only screen and (max-width: $MD-DESKTOP) {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      &__item{
+        margin-bottom: 40px;
+        font-weight: 700;
+        color: $GRAY-COLOR;
+        transition: all 0.3s;
+        &:hover{
+          color: $WHITE-COLOR;
+        }
+        @media only screen and (max-width: $MD-DESKTOP) {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }

@@ -5,6 +5,7 @@ import Layout from './components/layouts/Layout';
 import Callback from './pages/Callback';
 import Home from './pages/Home/Home';
 import ProtectedPage from './components/router/ProtectedPage';
+// All styles are in assets/styles
 
 function App () {
   return (

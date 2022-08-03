@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import generateRandomString from 'generate-random-string';
 import querystring from 'query-string';
-import { TokenBody } from './AuthModels';
+import { TokenBody, RefreshTokenBody } from './AuthModels';
+import { UserStore } from '../store/UserStore';
 
 const AuthURL: string = import.meta.env.VITE_AUTH_SPOTIFY_URI as string;
 
@@ -46,6 +47,13 @@ export default {
       code,
       redirect_uri: redirectURI,
       grant_type: 'authorization_code'
+    };
+    return api.post('api/token', querystring.stringify(body), { headers: getHeaders() });
+  },
+  refreshToken (): Promise<AxiosResponse> {
+    const body: RefreshTokenBody = {
+      refresh_token: UserStore.getRefreshToken(),
+      grant_type: 'refresh_token'
     };
     return api.post('api/token', querystring.stringify(body), { headers: getHeaders() });
   }

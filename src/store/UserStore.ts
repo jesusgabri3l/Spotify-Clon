@@ -31,6 +31,14 @@ export class UserStoreImpl {
   setTopArtists (artists: any) {
     this.user.topArtists = artists;
   }
+
+  getAccessToken () {
+    return this.auth.accessToken;
+  }
+
+  getRefreshToken () {
+    return this.auth.refreshToken;
+  }
 }
 
 export const UserStore = new UserStoreImpl({ accessToken, refreshToken }, {});

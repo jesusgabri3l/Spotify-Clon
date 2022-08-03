@@ -8,15 +8,6 @@ interface Image {
     url?: string;
     width?: number;
 }
-interface topArtists {
-    href?: string;
-    items?: any[],
-    limit?: number;
-    next?: string;
-    offset?: number;
-    previous?: string;
-    total?: number;
-}
 
 export interface User{
     country?: string;
@@ -31,5 +22,4 @@ export interface User{
     product?: string;
     type?: string;
     uri?: string;
-    topArtists?: topArtists;
 }

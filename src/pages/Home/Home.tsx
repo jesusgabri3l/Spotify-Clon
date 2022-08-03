@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Me from './Me';
 import Login from './Login';
 import Loader from '../../components/layouts/Loader';
-
+// styles at 'pages/home/_home.scss'
 interface Props {
   UserStore: UserStoreImpl;
 }
@@ -27,9 +27,8 @@ const Home = observer(({ UserStore }: Props) => {
         UserStore.setUser(user);
         setIsLogged(true);
         if (from) navigate(from, { replace: true });
-      } catch (err) {
-        console.error(err);
-        setIsLogged(false);
+      } catch (err: any) {
+        if (err.response.status !== 401) setIsLogged(false);
       } finally {
         setLoading(false);
       }

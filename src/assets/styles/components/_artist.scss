@@ -1,0 +1,11 @@
+.artist{
+    width: 185px;
+    height: 260px;
+    background-color: $ELEMENT_COLOR;
+    &__image{
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: auto;
+    }
+  }

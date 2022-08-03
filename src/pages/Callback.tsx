@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { observer } from 'mobx-react';
 import { UserStoreImpl } from '../store/UserStore';
+import { observer } from 'mobx-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
 import auth from '../services/auth';

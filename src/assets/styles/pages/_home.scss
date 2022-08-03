@@ -1,0 +1,29 @@
+.home{
+    &__header{
+      height: 45vh;
+      width: 100%;
+      padding-top: 20px;
+      padding-left: 80px;
+      background: linear-gradient(180deg, rgba(58, 121, 194, 0.7) 10.42%, #181818 100%);
+      @media only screen and (max-width: $S-TABLETS) {
+        padding-left: 0;
+        padding-top: 50px;
+      }
+      &__img{
+        height: 250px;
+        width: 250px;
+        border-radius: 50%;
+        @media only screen and (max-width: $MD-DESKTOP) {
+          height: 150px;
+          width: 150px;
+        }
+      }
+    }
+}
+
+.toptrack{
+  transition: all 0.3s;
+  &:hover{
+    background-color: $ELEMENT-COLOR;
+  }
+}
