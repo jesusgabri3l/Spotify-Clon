@@ -20,7 +20,7 @@ api.interceptors.response.use(function (response) {
 }, async function (error) {
   if (error) {
     const originalRequest = error.config;
-    if (error.response.status === 401 && UserStore.getRefreshToken()) {
+    if (error.response.status === 401 && UserStore.getRefreshToken() && error.response.data.error.message === 'The access token expired') {
       const { data } = await auth.refreshToken();
       UserStore.setAuth({ accessToken: data.access_token, refreshToken: data.refresh_token });
       const accessToken = getHeaders();
@@ -34,7 +34,7 @@ api.interceptors.response.use(function (response) {
 
 export default {
   URL,
-  getCurrentInfo (endpoint = ''): Promise<AxiosResponse> {
+  getCurrentUserInfo (endpoint = ''): Promise<AxiosResponse> {
     return api.get('me' + endpoint, { headers: getHeaders() });
   }
 };

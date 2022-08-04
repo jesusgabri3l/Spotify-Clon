@@ -9,13 +9,33 @@
       &__item{
         margin-bottom: 40px;
         font-weight: 700;
-        color: $GRAY-COLOR;
-        transition: all 0.3s;
-        &:hover{
-          color: $WHITE-COLOR;
-        }
         @media only screen and (max-width: $MD-DESKTOP) {
           margin-bottom: 0;
+        }
+        &__link{
+          i{
+            font-size: 20px;
+          }
+          span{
+            font-size: 17px;
+            @media only screen and (max-width: $M-PHONE) {
+              display: none;
+            }
+          }
+          *{
+            transition: all 0.3s;
+            color: $GRAY-COLOR;
+          }
+          &.active{
+            *{
+              color: $PRIMARY-COLOR;
+            }
+          }
+          &:hover{
+            *{
+              color: $WHITE-COLOR;
+            }
+          }
         }
       }
     }

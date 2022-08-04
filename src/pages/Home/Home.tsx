@@ -23,7 +23,7 @@ const Home = observer(({ UserStore }: Props) => {
     const getMeData = async (): Promise<void> => {
       try {
         setLoading(true);
-        const { data: user } = await api.getCurrentInfo();
+        const { data: user } = await api.getCurrentUserInfo();
         UserStore.setUser(user);
         setIsLogged(true);
         if (from) navigate(from, { replace: true });

@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
 import { Props } from './TrackModel';
 const Track = ({ track, index }: Props) => {
-  useEffect(() => console.log(track));
   const concataneArtists = (artists: any[]) => {
     const concatanedArtists = artists.map((artist: any) => artist.name).join(', ');
     return <p className="toptrack__mainInfo__naming__name text-xs text-gray mt-1">{concatanedArtists}</p>;

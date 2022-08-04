@@ -8,7 +8,7 @@ const AuthURL: string = import.meta.env.VITE_AUTH_SPOTIFY_URI as string;
 
 const clientID: string = import.meta.env.VITE_CLIENT_ID;
 const clientSecret: string = import.meta.env.VITE_CLIENT_SECRET;
-const scope: string = 'user-read-private user-read-email user-library-read user-top-read';
+const scope: string = 'user-read-private user-read-email user-library-read user-top-read user-follow-read';
 const redirectURI: string = import.meta.env.VITE_REDIRECT_URI;
 const state: string = generateRandomString('16', true);
 
