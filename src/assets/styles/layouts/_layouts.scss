@@ -41,12 +41,12 @@
       padding-left: $NAV_WIDTH;
       min-height: 100%;
       height: auto;
-      padding-bottom: 30px;
+      padding-bottom: 50px;
       @media only screen and (max-width: $MD-DESKTOP) {
         padding-left: 0;
         min-height: calc(100% - $NAV_HEIGHT);
         height: auto;
-        padding-bottom: calc( $NAV_HEIGHT + 30px );
+        padding-bottom: calc( $NAV_HEIGHT + 50px );
       }
     }
   }

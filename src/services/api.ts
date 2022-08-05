@@ -36,5 +36,11 @@ export default {
   URL,
   getCurrentUserInfo (endpoint = ''): Promise<AxiosResponse> {
     return api.get('me' + endpoint, { headers: getHeaders() });
+  },
+  getArtistInfo (id: string, endpoint = ''): Promise<AxiosResponse> {
+    return api.get(`artists/${id}`, { headers: getHeaders() });
+  },
+  getArtistTopTracks (id: string): Promise<AxiosResponse> {
+    return api.get(`artists/${id}/top-tracks/?market=${UserStore.getUserCountry()}`, { headers: getHeaders() });
   }
 };

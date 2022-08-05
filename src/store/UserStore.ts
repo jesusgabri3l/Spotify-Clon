@@ -28,8 +28,8 @@ export class UserStoreImpl {
     this.user = userResponse;
   }
 
-  setTopArtists (artists: any) {
-    this.user.topArtists = artists;
+  getUserCountry () {
+    return this.user.country;
   }
 
   getAccessToken () {

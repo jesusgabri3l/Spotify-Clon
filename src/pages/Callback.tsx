@@ -1,16 +1,12 @@
 import { useEffect } from 'react';
-import { UserStoreImpl } from '../store/UserStore';
+import { PropsObserver } from '../models/GlobalModels';
 import { observer } from 'mobx-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
 import auth from '../services/auth';
 import Loader from '../components/layouts/Loader';
 
-interface Props {
-  UserStore: UserStoreImpl
-}
-
-const Callback = observer(({ UserStore }: Props) => {
+const Callback = observer(({ UserStore }: PropsObserver) => {
   const navigate = useNavigate();
   const location = useLocation();
 

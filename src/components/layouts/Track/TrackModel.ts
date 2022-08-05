@@ -22,4 +22,5 @@ export interface Track {
 export interface Props {
     index: number;
     track: Track;
+    type?: string;
 }

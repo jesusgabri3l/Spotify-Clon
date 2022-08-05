@@ -1,12 +1,9 @@
 import { Outlet } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import { UserStoreImpl } from '../../store/UserStore';
+import { PropsObserver } from '../../models/GlobalModels';
 import Navbar from '../layouts/Navbar/Navbar';
 // Styles at 'layouts/_layouts.scss'
-interface Props {
-  UserStore: UserStoreImpl;
-}
-const Layout = observer(({ UserStore }: Props) => {
+const Layout = observer(({ UserStore }: PropsObserver) => {
   return (
         <>
           {

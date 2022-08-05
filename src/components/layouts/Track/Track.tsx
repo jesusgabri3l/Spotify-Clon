@@ -1,9 +1,10 @@
 import { Props } from './TrackModel';
-const Track = ({ track, index }: Props) => {
+const Track = ({ track, index, type = 'default' }: Props) => {
   const concataneArtists = (artists: any[]) => {
     const concatanedArtists = artists.map((artist: any) => artist.name).join(', ');
     return <p className="toptrack__mainInfo__naming__name text-xs text-gray mt-1">{concatanedArtists}</p>;
   };
+
   const millisToMinutesAndSeconds = (millis: number) => {
     const minutes = Math.floor(millis / 60000);
     const seconds = ((millis % 60000) / 1000).toFixed(0);
@@ -17,11 +18,13 @@ const Track = ({ track, index }: Props) => {
                   <img src={track.album.images[2].url} className="toptrack__mainInfo__img rounded-2xl"/>
                   <div className="toprack__mainInfo__naming">
                     <p className="toptrack__mainInfo__naming__name font-medium">{track.name}</p>
-                    {concataneArtists(track.artists)}
+                    {type === 'default' ? concataneArtists(track.artists) : ''}
                   </div>
                 </div>
                 <p className="toptrack__album text-sm hidden md:block text-gray text-left basis-1/6">{track.album.name}</p>
-                <p className="toptrack__album text-sm text-gray hidden md:block text-right">{millisToMinutesAndSeconds(track.duration_ms)}</p>
+                <p className="toptrack__album text-sm text-gray hidden md:block text-right basis-1/6">
+                  {millisToMinutesAndSeconds(track.duration_ms as number)}
+                </p>
               </div>
   );
 };
