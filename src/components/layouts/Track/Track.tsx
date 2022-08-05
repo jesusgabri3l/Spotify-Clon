@@ -18,7 +18,7 @@ const Track = ({ track, index, type = 'default' }: Props) => {
                   <img src={track.album.images[2].url} className="toptrack__mainInfo__img rounded-2xl"/>
                   <div className="toprack__mainInfo__naming">
                     <p className="toptrack__mainInfo__naming__name font-medium">{track.name}</p>
-                    {type === 'default' ? concataneArtists(track.artists) : ''}
+                    {type === 'default' ? concataneArtists(track.artists) : track.explicit && <p className='text-gray uppercase mt-2 text-xs'>explicit</p>}
                   </div>
                 </div>
                 <p className="toptrack__album text-sm hidden md:block text-gray text-left basis-1/6">{track.album.name}</p>
