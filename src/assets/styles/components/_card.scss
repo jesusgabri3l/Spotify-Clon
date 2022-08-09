@@ -1,0 +1,22 @@
+.card{
+    width: 170px;
+    height: 270px;
+    border-radius: 0.75rem;
+    background-color: $ELEMENT_COLOR;
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover{
+      background-color: $HOVER-ELEMENT-COLOR;
+    }
+    &__image{
+      width: 140px;
+      height: 140px;
+      margin: auto;
+      border-radius: 0.75rem;
+    }
+    &--artist{
+        &__image{
+            border-radius: 50%;
+          }
+    }
+  }

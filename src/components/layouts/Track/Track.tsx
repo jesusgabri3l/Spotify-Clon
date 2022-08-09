@@ -5,10 +5,17 @@ const Track = ({ track, index, type = 'default' }: Props) => {
     return <p className="toptrack__mainInfo__naming__name text-xs text-gray mt-1">{concatanedArtists}</p>;
   };
 
-  const millisToMinutesAndSeconds = (millis: number) => {
-    const minutes = Math.floor(millis / 60000);
-    const seconds = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ':' + (seconds < '10' ? '0' : '') + seconds;
+  const padTo2Digits = (num: number) => {
+    return num.toString().padStart(2, '0');
+  };
+
+  const millisToMinutesAndSeconds = (milliseconds: number) => {
+    const minutes = Math.floor(milliseconds / 60000);
+    const seconds = Math.round((milliseconds % 60000) / 1000);
+
+    return seconds === 60
+      ? `${minutes + 1}:00`
+      : `${minutes}:${padTo2Digits(seconds)}`;
   };
 
   return (

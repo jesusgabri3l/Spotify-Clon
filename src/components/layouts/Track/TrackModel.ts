@@ -1,5 +1,5 @@
 
-import { Artist } from '../Artist/ArtistModel';
+import { Artist } from '../../cards/Artist/ArtistModel';
 export interface Track {
     album?: any;
     artists: Artist[];

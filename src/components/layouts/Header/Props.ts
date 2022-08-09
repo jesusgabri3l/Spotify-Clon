@@ -1,9 +1,6 @@
-import { Image } from '../models/GlobalModels';
-export interface Auth {
-    accessToken?: string;
-    refreshToken?: string;
-}
-export interface User{
+import { Image } from '../../../models/GlobalModels';
+
+interface User{
     country?: string;
     display_name?: string;
     email?: string;
@@ -16,4 +13,10 @@ export interface User{
     product?: string;
     type?: string;
     uri?: string;
+    following?: boolean;
+}
+export interface Props {
+    user: User;
+    type?: string;
+    actions?: any;
 }

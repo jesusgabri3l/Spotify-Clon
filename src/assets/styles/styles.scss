@@ -1,18 +1,7 @@
 @import "normalize";
 @import "layouts/variables";
 @import "layouts/layouts";
-@import "components/artist";     
+@import "components/nav";
+@import "components/card"; 
 @import "components/header";
-@import "components/playlist";
 @import "components/track";
-.XD {
-    background: #ccc;
-  height: 50px;
-  line-height: 50px;
-  margin-top: 10px;
-  font-size: 30px;
-  padding-left: 10px;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0px;
-  }

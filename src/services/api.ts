@@ -37,8 +37,14 @@ export default {
   getCurrentUserInfo (endpoint = ''): Promise<AxiosResponse> {
     return api.get('me' + endpoint, { headers: getHeaders() });
   },
+  putCurrentUserInfo (endpoint = ''): Promise<AxiosResponse> {
+    return api.put('me' + endpoint, {}, { headers: getHeaders() });
+  },
+  deleteCurrentUserInfo (endpoint = ''): Promise<AxiosResponse> {
+    return api.delete('me' + endpoint, { headers: getHeaders() });
+  },
   getArtistInfo (id: string, endpoint = ''): Promise<AxiosResponse> {
-    return api.get(`artists/${id}`, { headers: getHeaders() });
+    return api.get(`artists/${id}${endpoint}`, { headers: getHeaders() });
   },
   getArtistTopTracks (id: string): Promise<AxiosResponse> {
     return api.get(`artists/${id}/top-tracks/?market=${UserStore.getUserCountry()}`, { headers: getHeaders() });

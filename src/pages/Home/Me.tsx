@@ -3,12 +3,13 @@ import { User } from '../../store/UserStoreModels';
 import api from '../../services/api';
 import Loader from '../../components/layouts/Loader';
 import Header from '../../components/layouts/Header/Header';
-import Artist from '../../components/layouts/Artist/Artist';
-import { Artist as ArtistModel } from '../../components/layouts/Artist/ArtistModel';
+import Artist from '../../components/cards/Artist/Artist';
+import { Artist as ArtistModel } from '../../components/cards/Artist/ArtistModel';
 import Track from '../../components/layouts/Track/Track';
 import { Track as TrackModel } from '../../components/layouts/Track/TrackModel';
-import Playlist from '../../components/layouts/Playlist/Playlist';
-import { Playlist as PlaylistModel } from '../../components/layouts/Playlist/PlaylistModel';
+import Playlist from '../../components/cards/Playlist/Playlist';
+import { Playlist as PlaylistModel } from '../../components/cards/Playlist/PlaylistModel';
+import SectionFlex from '../../components/layouts/SectionFlex';
 
 const Me = ({ user }: {user: User}) => {
   const [artists, setArtists] = useState<ArtistModel[]>([]);
@@ -41,35 +42,26 @@ const Me = ({ user }: {user: User}) => {
 
   return (
       <div className="h-full w-full home">
-        <Header user={user} type="me" />
+        <Header user={user} type="user" />
         {
           loading
             ? <Loader />
-            : <div className="home__content mt-12 px-6 md:px-12">
-          <div className="home__content__artists">
-            <h3 className="home__content__title  text-xl mb-2 font-bold mb-6 md:text-2xl">Top artists this month</h3>
-            <div className="home__content__artist__content flex items-center justify-around flex-wrap gap-y-5 gap-x-5 md:justify-start">
+            : <div className="home__content px-6 md:px-12">
+            <SectionFlex title="Top artists this month">
               {artists.map((artist: ArtistModel) => <Artist artist={artist} key={artist.id}/>)}
-            </div>
-          </div>
-          <div className="home__content__tracks mt-14">
+            </SectionFlex>
+          <section className="home__content__tracks mt-14">
             <h3 className="home__content__title text-xl mb-2 font-bold mb-6 md:text-2xl">Top tracks this month</h3>
             <div className="home__content__tracks__content mt-2">
               {tracks.map((track: TrackModel, index: number) => <Track track={track} index={index} key={track.id}/>)}
             </div>
-          </div>
-          <div className="home__content__playlists mt-14">
-            <h3 className="home__content__title text-xl mb-2 font-bold mb-6 md:text-2xl">Your playlists</h3>
-            <div className="home__content__playlists__content flex items-center justify-around flex-wrap gap-y-5 gap-x-5 md:justify-start">
+          </section>
+          <SectionFlex title="Your playlists">
               {playlists.map((playlist: PlaylistModel) => <Playlist playlist = {playlist} key={playlist.id} />)}
-            </div>
-          </div>
-          <div className="home__content__artists mt-14">
-            <h3 className="home__content__title  text-xl mb-2 font-bold mb-6 md:text-2xl">Artists you follow</h3>
-            <div className="home__content__artist__content flex items-center justify-around flex-wrap gap-y-5 gap-x-5 md:justify-start">
+          </SectionFlex>
+          <SectionFlex title="Artists you follow">
               {followingArtists.map((artist: ArtistModel) => <Artist artist={artist} key={artist.id}/>)}
-            </div>
-          </div>
+          </SectionFlex>
       </div>
         }
       </div>

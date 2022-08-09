@@ -1,6 +1,6 @@
 import CustomLink from '../../router/CustomLink';
 
-// Styles at 'layouts/_nav.scss'
+// Styles at 'components/_nav.scss'
 
 const Navbar = () => {
   return (

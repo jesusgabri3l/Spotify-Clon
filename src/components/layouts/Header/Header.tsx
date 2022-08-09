@@ -1,18 +1,41 @@
-import { User } from '../../../store/UserStoreModels';
+import { Props } from './Props';
 
-const Header = ({ user, type = 'me' }: {user : User, type : string}) => {
+const Header = ({ user, type = 'user', actions }: Props) => {
   const numberWithCommas = (followers: number) => followers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const handleClickFollow = () => {
+    if (user.following) actions.unfollow();
+    else actions.follow();
+  };
   return (
-        <header className={`header ${type === 'me' ? 'blue' : 'red'} flex flex-col items-center lg:items-center lg:flex-wrap lg:flex-row`}>
+        <header className={`header ${type === 'user' ? 'blue' : 'red'} flex flex-col items-center lg:items-center lg:flex-row`}>
           <img src={user.images && user.images[0].url} className="header__img" />
-          <div>
-            <p className="header__profile hidden text-l mb-2 text-center font-medium lg:ml-12 lg:text-left lg:block">{type === 'me' ? 'PROFILE' : 'ARTIST'}</p>
-            <h2 className="header__name font-bold text-center text-4xl mt-2 text-ellipsis md:text-5xl lg:ml-12 lg:text-left  lg:text-7xl xl:text-8xl ">
+          <div className="lg:ml-12">
+            <p className="header__profile hidden text-l mb-2 text-center font-medium lg:text-left lg:block">{type === 'user' ? 'PROFILE' : 'ARTIST'}</p>
+            <h2
+            className={
+              `header__name font-bold text-center mt-2 lg:text-left 
+              ${user.display_name && user.display_name?.length > 25 ? 'text-lg md:text-4xl' : 'text-2xl md:text-5xl lg:text-7xl'}`
+              }>
               {user.display_name}
             </h2>
-            <p className="header__profile text-base text-center text-gray mt-4 md:text-xl lg:ml-12  lg:text-left lg:mt-8">
+            <p className="header__profile text-base text-center text-gray mt-3 md:text-xl  lg:text-left lg:mt-6">
               {numberWithCommas(user.followers.total)} followers
             </p>
+            {
+              type !== 'user' &&
+              <button
+              className="header__following block rounded-md text-xs font-bold text-center mt-6 lg:text-left lg:mt-12"
+              onClick = {handleClickFollow}>
+                {
+                  user.following
+                    ? <>
+                  <i className="fa fa-check mr-2"></i>
+                  FOLLOWING
+                  </>
+                    : 'FOLLOW'
+                }
+              </button>
+            }
           </div>
         </header>
   );
