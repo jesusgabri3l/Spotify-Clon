@@ -1,6 +1,5 @@
 import { Playlist as PlaylistModel } from './PlaylistModel';
 const Playlist = ({ playlist }: {playlist: PlaylistModel}) => {
-  console.log(playlist);
   return (
   <div className="card p-4">
     <img className="card__image" src={playlist.images && playlist.images[0].url}/>

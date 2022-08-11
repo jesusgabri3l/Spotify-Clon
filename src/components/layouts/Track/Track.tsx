@@ -1,35 +1,40 @@
+import React from 'react';
 import { Props } from './TrackModel';
-const Track = ({ track, index, type = 'default' }: Props) => {
+import { millisToMinutesAndSeconds } from '../../../utils/index';
+import { Link } from 'react-router-dom';
+
+const Track = ({ track, index, showArtist = true, showAlbum = true, showImage = true }: Props) => {
   const concataneArtists = (artists: any[]) => {
-    const concatanedArtists = artists.map((artist: any) => artist.name).join(', ');
-    return <p className="toptrack__mainInfo__naming__name text-xs text-gray mt-1">{concatanedArtists}</p>;
+    console.log(artists);
+    return <p className="track__mainInfo__naming__name text-xs text-gray mt-1">
+      {
+        artists.map<React.ReactNode>((artist: any) => <span key={artist.id} className="text-xs text-gray hover:underline">
+          <Link to={`/artist/${artist.id}`}>{artist.name}</Link>
+          </span>
+        ).reduce((prev, curr) => [prev, ', ', curr])
+      }
+    </p>;
   };
-
-  const padTo2Digits = (num: number) => {
-    return num.toString().padStart(2, '0');
-  };
-
-  const millisToMinutesAndSeconds = (milliseconds: number) => {
-    const minutes = Math.floor(milliseconds / 60000);
-    const seconds = Math.round((milliseconds % 60000) / 1000);
-
-    return seconds === 60
-      ? `${minutes + 1}:00`
-      : `${minutes}:${padTo2Digits(seconds)}`;
-  };
-
   return (
-<div className="toptrack py-2 px-5 rounded-xl flex justify-between items-center mt-1" key={track.id}>
-                <div className="toptrack__mainInfo flex items-center gap-x-5 basis-full md:basis-2/6">
-                  <p className="toptrack__mainInfo__number text-gray">{index + 1}</p>
-                  <img src={track.album.images[2].url} className="toptrack__mainInfo__img rounded-2xl"/>
+<div className="track py-5 px-5 rounded-xl flex justify-between items-center mt-1" key={track.id}>
+                <div className="track__mainInfo flex items-center gap-x-5 basis-full md:basis-2/6">
+                  {
+                    index && <p className="track__mainInfo__number text-gray">{index}</p>
+                  }
+                  {
+                    showImage &&
+                    <img src={track.album.images[2].url} className="track__mainInfo__img"/>
+                  }
                   <div className="toprack__mainInfo__naming">
-                    <p className="toptrack__mainInfo__naming__name font-medium">{track.name}</p>
-                    {type === 'default' ? concataneArtists(track.artists) : track.explicit && <p className='text-gray uppercase mt-2 text-xs'>explicit</p>}
+                    <p className="track__mainInfo__naming__name font-medium">{track.name}</p>
+                    {showArtist ? concataneArtists(track.artists) : track.explicit && <p className='text-gray uppercase mt-2 text-xs'>explicit</p>}
                   </div>
                 </div>
-                <p className="toptrack__album text-sm hidden md:block text-gray text-left basis-1/6">{track.album.name}</p>
-                <p className="toptrack__album text-sm text-gray hidden md:block text-right basis-1/6">
+                {
+                  showAlbum &&
+                  <p className="track__album text-sm hidden md:block text-gray text-left basis-1/6">{track.album.name}</p>
+                }
+                <p className="track__album text-sm text-gray hidden md:block text-right basis-1/6">
                   {millisToMinutesAndSeconds(track.duration_ms as number)}
                 </p>
               </div>

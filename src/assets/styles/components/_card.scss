@@ -8,11 +8,27 @@
     &:hover{
       background-color: $HOVER-ELEMENT-COLOR;
     }
+    @media only screen and (max-width: $TABLETS) {
+      width: 30%;
+      margin: auto;
+
+    }
+    @media only screen and (max-width: $S-TABLETS) {
+      width: 40%;
+    }
+    @media only screen and (max-width: $M-PHONE) {
+      width: 80%;
+      margin: auto;
+    }
     &__image{
       width: 140px;
       height: 140px;
       margin: auto;
       border-radius: 0.75rem;
+      @media only screen and (max-width: $TABLETS) {
+        width: 160px;
+        height: 160px;
+      }
     }
     &--artist{
         &__image{

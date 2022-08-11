@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
-import Header from '../../components/layouts/Header/Header';
+import HeaderProfile from '../../components/layouts/Header/HeaderProfile';
 import Loader from '../../components/layouts/Loader';
 import Track from '../../components/layouts/Track/Track';
 import { Track as TrackModel } from '../../components/layouts/Track/TrackModel';
-import Album from '../../components/cards/Album/Album';
+import FilterDiscography from '../../components/pages/ArtistPage/FilterDiscography';
+import SectionFlex from '../../components/layouts/SectionFlex';
+import { Artist as ArtistModel } from '../../components/cards/Artist/ArtistModel';
+import Artist from '../../components/cards/Artist/Artist';
 
 const ArtistPage = () => {
   const { id } = useParams();
@@ -13,7 +16,8 @@ const ArtistPage = () => {
 
   const [artistInfo, setArtistInfo] = useState<any>();
   const [artistTopTracks, setArtistTopTracks] = useState<any>();
-  const [albums, setAlbums] = useState<any>();
+  const [relatedArtists, setRelatedArtists] = useState<ArtistModel[]>();
+
   const [seeMore, setSeeMore] = useState<boolean>(false);
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -35,15 +39,17 @@ const ArtistPage = () => {
   };
   const getArtistInfo = async () => {
     try {
+      setLoading(true);
       const { data: artist } = await api.getArtistInfo(id as string);
       const { data: artistTop } = await api.getArtistTopTracks(id as string);
-      const { data: albumsResponse } = await api.getArtistInfo(id as string, '/albums/?include_groups=album&limit=5');
       const { data: isFollowing } = await api.getCurrentUserInfo(`/following/contains/?ids=${id}&type=artist`);
+      const { data: relatedArtistsResponse } = await api.getArtistInfo(id as string, '/related-artists');
+
       artist.display_name = artist.name;
       artist.following = isFollowing[0];
       setArtistInfo(artist);
       setArtistTopTracks(artistTop.tracks);
-      setAlbums(albumsResponse.items);
+      setRelatedArtists(relatedArtistsResponse.artists);
     } catch (err: any) {
       if (err.response.status === 400 || err.response.status === 404) navigate('/');
     } finally {
@@ -54,7 +60,7 @@ const ArtistPage = () => {
   useEffect(() => {
     if (id) getArtistInfo();
     else navigate('/');
-  }, []);
+  }, [id]);
 
   return (
     <div className="h-full w-full artistPage">
@@ -62,7 +68,7 @@ const ArtistPage = () => {
             loading
               ? <Loader />
               : <>
-                    <Header user={artistInfo} type='artist' actions={{ follow: followAnArtist, unfollow: unfollowAnArtist }} />
+                    <HeaderProfile user={artistInfo} type='artist' actions={{ follow: followAnArtist, unfollow: unfollowAnArtist }} />
                     <div className="artistPage__content mt-12 px-6 md:px-12">
                         <div className="artistPage__content__toptracks">
                             <h3 className="home__content__title text-xl mb-2 font-bold mb-6 md:text-2xl">Most popular tracks</h3>
@@ -71,7 +77,7 @@ const ArtistPage = () => {
                                   // FIRST 5
                                 artistTopTracks.map((track: TrackModel, index: number) => {
                                   if (index < 5) {
-                                    return <Track track={track} index={index} key={track.id} type='artist' />;
+                                    return <Track track={track} index={index + 1} key={track.id} showArtist={false} />;
                                   } else {
                                     return '';
                                   }
@@ -81,7 +87,7 @@ const ArtistPage = () => {
                                   // LAST 5
                                 seeMore && artistTopTracks.map((track: TrackModel, index: number) => {
                                   if (index > 5) {
-                                    return <Track track={track} index={index} key={track.id} type='artist' />;
+                                    return <Track track={track} index={index + 1} key={track.id} showArtist={false} />;
                                   } else {
                                     return '';
                                   }
@@ -93,12 +99,16 @@ const ArtistPage = () => {
                                 </button>
                             </div>
                         </div>
-                      <section className="mt-14">
-                          <h3 className="text-xl mb-2 font-bold mb-6 md:text-2xl">Discography</h3>
-                          <div className="flex items-center justify-around flex-wrap gap-y-5 gap-x-7 md:justify-start">
-                            {albums.map((album: any) => <Album key={album.id} album={album} />)}
-                          </div>
-                      </section>
+                        <FilterDiscography id={id} />
+                        {
+                          relatedArtists && relatedArtists.length > 0 &&
+                          <SectionFlex title="Fans also listen to">
+                          {relatedArtists && relatedArtists.map((artist: ArtistModel, index: number) => {
+                            if (index < 6) return <Artist artist={artist} key={artist.id}/>;
+                            else return null;
+                          })}
+                        </SectionFlex>
+                        }
                     </div>
                 </>
         }

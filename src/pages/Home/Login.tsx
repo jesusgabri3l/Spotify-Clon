@@ -1,8 +1,8 @@
 import auth from '../../services/auth';
 import illustration from '../../assets/images/home_illustration.svg';
-const sendRequestToSpotify = ():void => auth.sendRequestToAuth();
 
 const Login = () => {
+  const sendRequestToSpotify = ():void => auth.sendRequestToAuth();
   return (
     <div className='w-screen h-screen flex flex-col justify-center items-center p-0 md:p-20 lg:p-5'>
       <div className='element_wrapper w-full flex flex-col justify-center items-center py-12 px-5 md:w-11/12 md:px-16 lg:w-1/2 lg:px-28'>

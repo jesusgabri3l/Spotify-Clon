@@ -48,5 +48,8 @@ export default {
   },
   getArtistTopTracks (id: string): Promise<AxiosResponse> {
     return api.get(`artists/${id}/top-tracks/?market=${UserStore.getUserCountry()}`, { headers: getHeaders() });
+  },
+  getAlbumInfo (id: string): Promise<AxiosResponse> {
+    return api.get(`albums/${id}`, { headers: getHeaders() });
   }
 };

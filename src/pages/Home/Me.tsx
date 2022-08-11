@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { User } from '../../store/UserStoreModels';
 import api from '../../services/api';
 import Loader from '../../components/layouts/Loader';
-import Header from '../../components/layouts/Header/Header';
+import HeaderProfile from '../../components/layouts/Header/HeaderProfile';
 import Artist from '../../components/cards/Artist/Artist';
 import { Artist as ArtistModel } from '../../components/cards/Artist/ArtistModel';
 import Track from '../../components/layouts/Track/Track';
@@ -23,10 +23,10 @@ const Me = ({ user }: {user: User}) => {
     const getUserLibrary = async (): Promise<void> => {
       setLoading(true);
       try {
-        const { data: artistsResponse } = await api.getCurrentUserInfo('/top/artists/?limit=7&time_range=short_term');
-        const { data: tracksResponse } = await api.getCurrentUserInfo('/top/tracks/?limit=4&time_range=short_term');
+        const { data: artistsResponse } = await api.getCurrentUserInfo('/top/artists/?limit=6&time_range=short_term');
+        const { data: tracksResponse } = await api.getCurrentUserInfo('/top/tracks/?limit=5&time_range=short_term');
         const { data: playlistsResponse } = await api.getCurrentUserInfo('/playlists');
-        const { data: following } = await api.getCurrentUserInfo('/following/?type=artist&limit=8');
+        const { data: following } = await api.getCurrentUserInfo('/following/?type=artist&limit=6');
         setArtists(artistsResponse.items);
         setTracks(tracksResponse.items);
         setPlaylists(playlistsResponse.items);
@@ -42,7 +42,7 @@ const Me = ({ user }: {user: User}) => {
 
   return (
       <div className="h-full w-full home">
-        <Header user={user} type="user" />
+        <HeaderProfile user={user} type="user" />
         {
           loading
             ? <Loader />
@@ -53,7 +53,7 @@ const Me = ({ user }: {user: User}) => {
           <section className="home__content__tracks mt-14">
             <h3 className="home__content__title text-xl mb-2 font-bold mb-6 md:text-2xl">Top tracks this month</h3>
             <div className="home__content__tracks__content mt-2">
-              {tracks.map((track: TrackModel, index: number) => <Track track={track} index={index} key={track.id}/>)}
+              {tracks.map((track: TrackModel, index: number) => <Track track={track} index={index + 1} key={track.id}/>)}
             </div>
           </section>
           <SectionFlex title="Your playlists">

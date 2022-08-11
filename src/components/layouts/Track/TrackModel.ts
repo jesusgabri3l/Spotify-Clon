@@ -20,7 +20,9 @@ export interface Track {
     uri?: string;
 }
 export interface Props {
-    index: number;
+    index?: number;
     track: Track;
-    type?: string;
+    showArtist?: boolean;
+    showAlbum?: boolean;
+    showImage?: boolean;
 }

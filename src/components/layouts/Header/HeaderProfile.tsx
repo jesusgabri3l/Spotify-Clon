@@ -1,7 +1,7 @@
 import { Props } from './Props';
+import { numberWithCommas } from '../../../utils/index';
 
-const Header = ({ user, type = 'user', actions }: Props) => {
-  const numberWithCommas = (followers: number) => followers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+const HeaderProfile = ({ user, type = 'user', actions }: Props) => {
   const handleClickFollow = () => {
     if (user.following) actions.unfollow();
     else actions.follow();
@@ -41,4 +41,4 @@ const Header = ({ user, type = 'user', actions }: Props) => {
   );
 };
 
-export default Header;
+export default HeaderProfile;

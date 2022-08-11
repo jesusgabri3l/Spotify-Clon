@@ -6,6 +6,9 @@ import Callback from './pages/Callback';
 import Home from './pages/Home/Home';
 import ProtectedPage from './components/router/ProtectedPage';
 import ArtistPage from './pages/Artist/ArtistPage';
+import DiscographyPage from './pages/Artist/DiscographyPage';
+import AlbumPage from './pages/Album/AlbumPage';
+
 // All styles are in assets/styles
 
 function App () {
@@ -20,12 +23,12 @@ function App () {
           <ArtistPage />
         </ProtectedPage>}>
         </Route>
-        <Route path="tracks/*" element = {<ProtectedPage UserStore={UserStore}>
-          <div className="min-h-screen flex justify-center items-center">
-            <h1 className="text-3xl font-bold text-blue-600">
-              XDDD
-            </h1>
-          </div>
+        <Route path="artist/:id/discography" element = {<ProtectedPage UserStore={UserStore}>
+          <DiscographyPage />
+        </ProtectedPage>}>
+        </Route>
+        <Route path="album/:id" element = {<ProtectedPage UserStore={UserStore}>
+          <AlbumPage />
         </ProtectedPage>}>
         </Route>
       </Route>
