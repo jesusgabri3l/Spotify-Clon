@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import HeaderTrackList from '../../components/layouts/Header/HeaderTrackList';
 import Loader from '../../components/layouts/Loader';
 import Track from '../../components/layouts/Track/Track';
 import api from '../../services/api';
 const AlbumPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
   const [albumInfo, setAlbumInfo] = useState<any>();
 
@@ -15,13 +16,14 @@ const AlbumPage = () => {
         setLoading(true);
         const { data } = await api.getAlbumInfo(id as string);
         setAlbumInfo(data);
-      } catch (err) {
-        console.error(err);
+      } catch (err: any) {
+        if (err.response.status === 400 || err.response.status === 404) navigate('/');
       } finally {
         setLoading(false);
       }
     };
-    getAlbumInfo();
+    if (id) getAlbumInfo();
+    else navigate('/');
   }, []);
   return (
     <div className="w-full h-full albumPage">

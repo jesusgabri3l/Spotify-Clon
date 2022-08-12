@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 const Track = ({ track, index, showArtist = true, showAlbum = true, showImage = true }: Props) => {
   const concataneArtists = (artists: any[]) => {
-    console.log(artists);
     return <p className="track__mainInfo__naming__name text-xs text-gray mt-1">
       {
         artists.map<React.ReactNode>((artist: any) => <span key={artist.id} className="text-xs text-gray hover:underline">

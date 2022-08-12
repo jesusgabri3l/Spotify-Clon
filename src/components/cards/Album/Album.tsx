@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { getAlbumReleaseDate } from '../../../utils/index';
-const Album = ({ album }: any) => {
+import { Album as AlbumModel } from './AlbumModel';
+const Album = ({ album }: {album: AlbumModel}) => {
+  console.log(album);
   return (
   <Link to={`/album/${album.id}`} className="card p-4">
     <img className="card__image" src={album.images && album.images[0].url}/>
