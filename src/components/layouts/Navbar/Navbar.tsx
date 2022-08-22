@@ -13,7 +13,7 @@ const Navbar = () => {
                   </CustomLink>
                 </li>
                 <li className="navigator__list__item">
-                  <CustomLink to="/playlist">
+                  <CustomLink to="/search">
                   <i className="fa fa-search mr-2" />
                   <span>Search</span>
                   </CustomLink>

@@ -6,7 +6,10 @@ const Artist = ({ artist }: {artist: ArtistModel}) => {
   const navigate = useNavigate();
   return (
     <div className="card card--artist py-6 px-4 justify-self-start" key={artist.id} onClick={() => navigate(`/artist/${artist.id}`)} >
-      <img className="card__image card--artist__image" src={artist.images && artist.images[0].url} />
+      {
+        artist.images?.length > 0 &&
+        <img className="card__image card--artist__image" src={artist.images[0].url} />
+      }
       <div className="">
         <p className="card__name block font-medium mt-4 text-sm truncate md:text-base">{artist.name}</p>
         <p className="artist__name mt-1 text-xs md:text-sm text-gray">Artist</p>

@@ -86,7 +86,7 @@ const ArtistPage = () => {
                                 {
                                   // LAST 5
                                 seeMore && artistTopTracks.map((track: TrackModel, index: number) => {
-                                  if (index > 5) {
+                                  if (index > 5 && track) {
                                     return <Track track={track} index={index + 1} key={track.id} showArtist={false} />;
                                   } else {
                                     return '';

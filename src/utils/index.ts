@@ -23,5 +23,13 @@ const getAlbumReleaseDateByDay = (album: any) => {
   const index = album.release_date.indexOf('-');
   return album.release_date.slice(0, index);
 };
+const debounce = (fn: Function, ms = 300) => {
+  console.log(ms);
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return function (this: any, ...args: any[]) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), ms);
+  };
+};
 
-export { getAlbumReleaseDate, numberWithCommas, millisToMinutesAndSeconds };
+export { getAlbumReleaseDate, numberWithCommas, millisToMinutesAndSeconds, debounce };

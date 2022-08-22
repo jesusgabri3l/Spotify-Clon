@@ -31,7 +31,11 @@ const Track = ({ track, index, showArtist = true, showAlbum = true, showImage = 
                 </div>
                 {
                   showAlbum &&
-                  <p className="track__album text-sm hidden md:block text-gray text-left basis-1/6">{track.album.name}</p>
+                  <Link
+                    to={`/album/${track.album.id}`}
+                    className="track__album text-sm hidden md:block text-gray text-left basis-1/6 hover:underline">
+                    {track.album.name}
+                  </Link>
                 }
                 <p className="track__album text-sm text-gray hidden md:block text-right basis-1/6">
                   {millisToMinutesAndSeconds(track.duration_ms as number)}

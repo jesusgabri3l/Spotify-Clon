@@ -8,6 +8,7 @@ import ProtectedPage from './components/router/ProtectedPage';
 import ArtistPage from './pages/Artist/ArtistPage';
 import DiscographyPage from './pages/Artist/DiscographyPage';
 import AlbumPage from './pages/Album/AlbumPage';
+import SearchPage from './pages/Search/SearchPage';
 
 // All styles are in assets/styles
 
@@ -25,6 +26,10 @@ function App () {
         </Route>
         <Route path="artist/:id/discography" element = {<ProtectedPage UserStore={UserStore}>
           <DiscographyPage />
+        </ProtectedPage>}>
+        </Route>
+        <Route path="search" element = {<ProtectedPage UserStore={UserStore}>
+          <SearchPage />
         </ProtectedPage>}>
         </Route>
         <Route path="album/:id" element = {<ProtectedPage UserStore={UserStore}>
