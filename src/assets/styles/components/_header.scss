@@ -33,6 +33,7 @@ $GREEN-GRADIENT: rgba(36, 86, 19, 0.7);
       height: 200px;
       width: 200px;
       border-radius: 50%;
+      object-fit: cover;
       @media only screen and (max-width: $MD-DESKTOP) {
         height: 150px;
         width: 150px;

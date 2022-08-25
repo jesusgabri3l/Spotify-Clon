@@ -1,6 +1,6 @@
 import { Props } from './Props';
 import { numberWithCommas } from '../../../utils/index';
-
+import defaultUserImg from '../../../assets/images/default-user.png';
 const HeaderProfile = ({ user, type = 'user', actions }: Props) => {
   const handleClickFollow = () => {
     if (user.following) actions.unfollow();
@@ -8,7 +8,7 @@ const HeaderProfile = ({ user, type = 'user', actions }: Props) => {
   };
   return (
         <header className={`header ${type === 'user' ? 'blue' : 'red'} flex flex-col items-center lg:items-center lg:flex-row`}>
-          <img src={user.images && user.images[0].url} className="header__img" />
+          <img src={user.images?.length > 0 ? user.images[0].url : defaultUserImg} className="header__img" />
           <div className="lg:ml-12">
             <p className="header__profile hidden text-l mb-2 text-center font-medium lg:text-left lg:block">{type === 'user' ? 'PROFILE' : 'ARTIST'}</p>
             <h2

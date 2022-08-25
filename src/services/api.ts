@@ -53,9 +53,12 @@ export default {
     return api.get(`albums/${id}`, { headers: getHeaders() });
   },
   getSearchInfo (q: string): Promise<AxiosResponse> {
-    return api.get(`search/?q=${q}&type=track,artist,album,playlist&limit=8&market=${UserStore.getUserCountry()}`, { headers: getHeaders() });
+    return api.get(`search/?q=${q}&type=artist,album,playlist&limit=8&market=${UserStore.getUserCountry()}`, { headers: getHeaders() });
+  },
+  getSearchInfoTracks (q: string): Promise<AxiosResponse> {
+    return api.get(`search/?q=${q}&type=track&limit=5&market=${UserStore.getUserCountry()}`, { headers: getHeaders() });
   },
   getNewReleases (): Promise<AxiosResponse> {
-    return api.get(`browse/new-releases/?country=${UserStore.getUserCountry()}`, { headers: getHeaders() });
+    return api.get(`browse/new-releases/?country=${UserStore.getUserCountry()}&limit=16`, { headers: getHeaders() });
   }
 };

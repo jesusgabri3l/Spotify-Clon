@@ -13,6 +13,7 @@ const useFilterDiscography = () => {
     setFilterBy(filter);
     if (filter === 'album') setItems(albums);
     if (filter === 'single') setItems(singles);
+    if (filter === 'compilation') setItems(compilations);
   };
   const searchAlbumOrSingle = () => {
     if (keyword !== '') {

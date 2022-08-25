@@ -10,7 +10,7 @@ const Layout = observer(({ UserStore }: PropsObserver) => {
             !UserStore.user.id
               ? <Outlet />
               : <div className="page_wrapper">
-            <Navbar />
+            <Navbar UserStore={UserStore} />
             <div className="page_wrapper__content">
                   <Outlet />
             </div>

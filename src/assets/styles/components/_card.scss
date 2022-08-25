@@ -25,6 +25,8 @@
       height: 140px;
       margin: auto;
       border-radius: 0.75rem;
+      object-fit: cover;
+      background-color: $ELEMENT-COLOR;
       @media only screen and (max-width: $TABLETS) {
         width: 160px;
         height: 160px;

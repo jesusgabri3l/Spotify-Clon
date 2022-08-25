@@ -25,11 +25,10 @@ const Me = ({ user }: {user: User}) => {
       try {
         const { data: artistsResponse } = await api.getCurrentUserInfo('/top/artists/?limit=6&time_range=short_term');
         const { data: tracksResponse } = await api.getCurrentUserInfo('/top/tracks/?limit=5&time_range=short_term');
-        const { data: playlistsResponse } = await api.getCurrentUserInfo('/playlists');
         const { data: following } = await api.getCurrentUserInfo('/following/?type=artist&limit=6');
         setArtists(artistsResponse.items);
         setTracks(tracksResponse.items);
-        setPlaylists(playlistsResponse.items);
+        setPlaylists(user.playlists!);
         setFollowingArtists(following.artists.items);
       } catch (e) {
         console.error(e);

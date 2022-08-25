@@ -21,7 +21,8 @@ const Home = observer(({ UserStore }: PropsObserver) => {
       try {
         setLoading(true);
         const { data: user } = await api.getCurrentUserInfo();
-        UserStore.setUser(user);
+        const { data: playlistsResponse } = await api.getCurrentUserInfo('/playlists');
+        UserStore.setUser({ ...user, playlists: playlistsResponse.items });
         setIsLogged(true);
         if (from) navigate(from, { replace: true });
       } catch (err: any) {

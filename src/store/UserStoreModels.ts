@@ -1,4 +1,5 @@
 import { Image } from '../models/GlobalModels';
+import { Playlist } from '../components/cards/Playlist/PlaylistModel';
 export interface Auth {
     accessToken?: string;
     refreshToken?: string;
@@ -16,4 +17,5 @@ export interface User{
     product?: string;
     type?: string;
     uri?: string;
+    playlists?: Playlist[];
 }
