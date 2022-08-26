@@ -8,12 +8,6 @@ $PRIMARY-COLOR-REDUCED : rgba(115, 91, 243, 0.25);
 $WHITE-COLOR :#fff;
 $GRAY-COLOR : #b3b3b3;
 
-@mixin flex--center{
-    display: flex;
-    justify-content:center;
-    align-items:center;
-}
-
 //BREAK-POINTS
 $LG-DESKTOP: 1920px;
 $MD-DESKTOP: 1280px;
