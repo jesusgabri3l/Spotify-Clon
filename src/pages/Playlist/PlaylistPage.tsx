@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import ErrorAlert from '../../components/alerts/ErrorAlert';
 import InfoAlert from '../../components/alerts/InfoAlert';
-import { Playlist as PlaylistModel } from '../../components/cards/Playlist/PlaylistModel';
 import HeaderPlaylist from '../../components/layouts/Header/HeaderPlaylist';
 import Loader from '../../components/layouts/Loader';
 import Track from '../../components/layouts/Track/Track';
@@ -11,6 +11,7 @@ const Playlist = () => {
   const navigate = useNavigate();
   const [playlist, setPlaylist] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     const getPlayListInfo = async () => {
@@ -34,7 +35,8 @@ const Playlist = () => {
           setPlaylist(playlistInfo);
         }
       } catch (err: any) {
-        if ((err.response.status === 400 || err.response.status === 404) && id === 'me') navigate('/');
+        if (err.response.status === 404 && id !== 'me') navigate('/');
+        if (err.response.status === 400) setError(true);
       } finally {
         setLoading(false);
       }
@@ -47,7 +49,8 @@ const Playlist = () => {
           {
             loading
               ? <Loader />
-              : <>
+              : !error
+                  ? <>
                 <HeaderPlaylist playlist={playlist} />
                 <div className="px-6 md:px-12">
                 <section className="albumPage__trackList mt-6">
@@ -63,6 +66,7 @@ const Playlist = () => {
             </section>
                 </div>
               </>
+                  : <ErrorAlert />
           }
         </div>
   );

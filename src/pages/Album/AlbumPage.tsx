@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import ErrorAlert from '../../components/alerts/ErrorAlert';
 import HeaderAlbum from '../../components/layouts/Header/HeaderAlbum';
 import Loader from '../../components/layouts/Loader';
 import Track from '../../components/layouts/Track/Track';
@@ -8,6 +9,7 @@ const AlbumPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(true);
   const [albumInfo, setAlbumInfo] = useState<any>();
 
   useEffect(() => {
@@ -17,7 +19,8 @@ const AlbumPage = () => {
         const { data } = await api.getAlbumInfo(id as string);
         setAlbumInfo(data);
       } catch (err: any) {
-        if (err.response.status === 400 || err.response.status === 404) navigate('/');
+        if (err.response.status === 404) navigate('/');
+        if (err.response.status === 400) setError(true);
       } finally {
         setLoading(false);
       }
@@ -30,7 +33,8 @@ const AlbumPage = () => {
       {
         loading
           ? <Loader />
-          : <>
+          : !error
+              ? <>
             <HeaderAlbum album={albumInfo} />
             <div className="px-6 md:px-12">
             <section className="albumPage__trackList mt-6">
@@ -49,6 +53,7 @@ const AlbumPage = () => {
 
             </div>
         </>
+              : <ErrorAlert />
       }
     </div>
   );

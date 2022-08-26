@@ -7,10 +7,12 @@ import Artist from '../../components/cards/Artist/Artist';
 import Album from '../../components/cards/Album/Album';
 import Track from '../../components/layouts/Track/Track';
 import Playlist from '../../components/cards/Playlist/Playlist';
+import ErrorAlert from '../../components/alerts/ErrorAlert';
 const SearchPage = () => {
   const [infoSearch, setInfoSearch] = useState<any>();
   const [newReleases, setNewReleases] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
   const fetchSearchInformation = async (keywordChange: string) => {
     setQuery(keywordChange);
@@ -25,10 +27,14 @@ const SearchPage = () => {
 
   useEffect(() => {
     const getNewReleases = async () => {
-      setLoading(true);
-      const { data: newReleasesResponse } = await api.getNewReleases();
-      setNewReleases(newReleasesResponse.albums.items);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const { data: newReleasesResponse } = await api.getNewReleases();
+        setNewReleases(newReleasesResponse.albums.items);
+        setLoading(false);
+      } catch (err: any) {
+        if (err.response.status === 400) setError(true);
+      }
     };
     getNewReleases();
   }, []);
@@ -49,7 +55,8 @@ const SearchPage = () => {
       {
         loading
           ? <Loader />
-          : <div className="mt-12">
+          : !error
+              ? <div className="mt-12">
               {
                 query
                   ? <div>
@@ -76,6 +83,7 @@ const SearchPage = () => {
                   </div>
               }
             </div>
+              : <ErrorAlert />
       }
     </div>
   );

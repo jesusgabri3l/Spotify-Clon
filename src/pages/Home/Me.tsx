@@ -11,6 +11,7 @@ import Playlist from '../../components/cards/Playlist/Playlist';
 import { Playlist as PlaylistModel } from '../../components/cards/Playlist/PlaylistModel';
 import SectionFlex from '../../components/layouts/SectionFlex';
 import InfoAlert from '../../components/alerts/InfoAlert';
+import ErrorAlert from '../../components/alerts/ErrorAlert';
 
 const Me = ({ user }: {user: User}) => {
   const [artists, setArtists] = useState<ArtistModel[]>([]);
@@ -19,6 +20,7 @@ const Me = ({ user }: {user: User}) => {
   const [followingArtists, setFollowingArtists] = useState<ArtistModel[]>([]);
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     const getUserLibrary = async (): Promise<void> => {
@@ -31,8 +33,8 @@ const Me = ({ user }: {user: User}) => {
         setTracks(tracksResponse.items);
         setPlaylists(user.playlists!);
         setFollowingArtists(following.artists.items);
-      } catch (e) {
-        console.error(e);
+      } catch (err: any) {
+        if (err.response.status === 400) setError(true);
       } finally {
         setLoading(false);
       }
@@ -46,7 +48,8 @@ const Me = ({ user }: {user: User}) => {
         {
           loading
             ? <Loader />
-            : <div className="home__content px-6 md:px-12">
+            : !error
+                ? <div className="home__content px-6 md:px-12">
             <SectionFlex title="Top artists this month">
               {
                 artists.length > 0
@@ -79,6 +82,7 @@ const Me = ({ user }: {user: User}) => {
               }
           </SectionFlex>
       </div>
+                : <ErrorAlert />
         }
       </div>
   );

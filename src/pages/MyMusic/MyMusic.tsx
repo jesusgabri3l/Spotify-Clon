@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react';
 import { useEffect, useState } from 'react';
 import { PropsObserver } from '../../models/GlobalModels';
-import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import Loader from '../../components/layouts/Loader';
 import useFilterDiscography from '../../utils/hooks/useFilterDiscography';
@@ -10,11 +9,13 @@ import InfoAlert from '../../components/alerts/InfoAlert';
 import Album from '../../components/cards/Album/Album';
 import Artist from '../../components/cards/Artist/Artist';
 import Playlist from '../../components/cards/Playlist/Playlist';
+import ErrorAlert from '../../components/alerts/ErrorAlert';
 const MyMusic = observer(({ UserStore }: PropsObserver) => {
-  const navigate = useNavigate();
   const discography = useFilterDiscography();
 
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+
   useEffect(() => {
     const getUsersLibrary = async () => {
       try {
@@ -27,7 +28,7 @@ const MyMusic = observer(({ UserStore }: PropsObserver) => {
             compilationsResponse: UserStore.user.playlists!
           });
       } catch (err: any) {
-        if (err.response.status === 400) navigate('/');
+        if (err.response.status === 400) setError(true);
       } finally {
         setLoading(false);
       }
@@ -39,7 +40,8 @@ const MyMusic = observer(({ UserStore }: PropsObserver) => {
       {
         loading
           ? <Loader />
-          : <div className="px-6 md:px-12 pt-12">
+          : !error
+              ? <div className="px-6 md:px-12 pt-12">
             <div className="flex gap-7 mb-12">
               <button
                       onClick={() => discography.handleFilterDiscographyClick('album')}
@@ -73,6 +75,7 @@ const MyMusic = observer(({ UserStore }: PropsObserver) => {
                 }
               </SectionFlex>
             </div>
+              : <ErrorAlert />
       }
 
     </div>

@@ -10,6 +10,7 @@ import SectionFlex from '../../components/layouts/SectionFlex';
 import { Artist as ArtistModel } from '../../components/cards/Artist/ArtistModel';
 import Artist from '../../components/cards/Artist/Artist';
 import InfoAlert from '../../components/alerts/InfoAlert';
+import ErrorAlert from '../../components/alerts/ErrorAlert';
 
 const ArtistPage = () => {
   const { id } = useParams();
@@ -22,6 +23,7 @@ const ArtistPage = () => {
   const [seeMore, setSeeMore] = useState<boolean>(false);
 
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
   const followAnArtist = async () => {
     try {
       await api.putCurrentUserInfo(`/following/?ids=${id}&type=artist`);
@@ -51,7 +53,8 @@ const ArtistPage = () => {
       setArtistTopTracks(artistTop.tracks);
       setRelatedArtists(relatedArtistsResponse.artists);
     } catch (err: any) {
-      if (err.response.status === 400 || err.response.status === 404) navigate('/');
+      if (err.response.status === 404) navigate('/');
+      if (err.response.status === 400) setError(true);
     } finally {
       setLoading(false);
     }
@@ -67,7 +70,8 @@ const ArtistPage = () => {
         {
             loading
               ? <Loader />
-              : <>
+              : !error
+                  ? <>
                     <HeaderProfile user={artistInfo} type='artist' actions={{ follow: followAnArtist, unfollow: unfollowAnArtist }} />
                     <div className="artistPage__content mt-12 px-6 md:px-12">
                         <div className="artistPage__content__toptracks">
@@ -116,6 +120,7 @@ const ArtistPage = () => {
                         }
                     </div>
                 </>
+                  : <ErrorAlert />
         }
     </div>
   );
