@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import HeaderTrackList from '../../components/layouts/Header/HeaderTrackList';
+import HeaderAlbum from '../../components/layouts/Header/HeaderAlbum';
 import Loader from '../../components/layouts/Loader';
 import Track from '../../components/layouts/Track/Track';
 import api from '../../services/api';
@@ -31,7 +31,7 @@ const AlbumPage = () => {
         loading
           ? <Loader />
           : <>
-            <HeaderTrackList info={albumInfo} />
+            <HeaderAlbum album={albumInfo} />
             <div className="px-6 md:px-12">
             <section className="albumPage__trackList mt-6">
               <div className="home__content__tracks__content mt-2">

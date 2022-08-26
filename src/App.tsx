@@ -9,6 +9,7 @@ import ArtistPage from './pages/Artist/ArtistPage';
 import DiscographyPage from './pages/Artist/DiscographyPage';
 import AlbumPage from './pages/Album/AlbumPage';
 import SearchPage from './pages/Search/SearchPage';
+import PlaylistPage from './pages/Playlist/PlaylistPage';
 
 // All styles are in assets/styles
 
@@ -34,6 +35,10 @@ function App () {
         </Route>
         <Route path="album/:id" element = {<ProtectedPage UserStore={UserStore}>
           <AlbumPage />
+        </ProtectedPage>}>
+        </Route>
+        <Route path="playlist/:id" element = {<ProtectedPage UserStore={UserStore}>
+          <PlaylistPage />
         </ProtectedPage>}>
         </Route>
       </Route>

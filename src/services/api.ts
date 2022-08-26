@@ -52,6 +52,9 @@ export default {
   getAlbumInfo (id: string): Promise<AxiosResponse> {
     return api.get(`albums/${id}`, { headers: getHeaders() });
   },
+  getPlaylistInfo (id: string, endpoint = '/'): Promise<AxiosResponse> {
+    return api.get(`playlists/${id}${endpoint}`, { headers: getHeaders() });
+  },
   getSearchInfo (q: string): Promise<AxiosResponse> {
     return api.get(`search/?q=${q}&type=artist,album,playlist&limit=8&market=${UserStore.getUserCountry()}`, { headers: getHeaders() });
   },
