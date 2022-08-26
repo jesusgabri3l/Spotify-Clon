@@ -18,7 +18,6 @@ const SearchPage = () => {
       setLoading(true);
       const { data: searchResponse } = await api.getSearchInfo(keywordChange);
       const { data: searchResponseTracks } = await api.getSearchInfoTracks(keywordChange);
-
       setLoading(false);
       setInfoSearch({ ...searchResponse, ...searchResponseTracks });
     }
