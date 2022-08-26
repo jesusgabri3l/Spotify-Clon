@@ -28,7 +28,7 @@ const useFilterDiscography = () => {
   };
   const setDataDiscography = (
     { albumsResponse = [], singlesResponse = [], compilationsResponse = [] }
-    : {albumsResponse: AlbumModel[], singlesResponse: AlbumModel[], compilationsResponse: AlbumModel[]}) => {
+    : {albumsResponse: AlbumModel[], singlesResponse: AlbumModel[], compilationsResponse: any[]}) => {
     if (albumsResponse.length === 0) {
       setItems(singlesResponse);
       setFilterBy('single');

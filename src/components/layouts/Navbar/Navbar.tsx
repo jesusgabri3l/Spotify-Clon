@@ -8,7 +8,7 @@ import userDefaultImg from '../../../assets/images/default-user.png';
 
 const Navbar = observer(({ UserStore }: PropsObserver) => {
   const [activeDropDown, setActiveDropdown] = useState<boolean>(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<any>(null);
 
   useEffect(() => {
     document.addEventListener('click', (evt) => {
@@ -32,7 +32,7 @@ const Navbar = observer(({ UserStore }: PropsObserver) => {
                   </CustomLink>
                 </li>
                 <li className="navigator__list__item">
-                  <CustomLink to="/tracks">
+                  <CustomLink to="/mymusic">
                     <i className="fa fa-music mr-2"/>
                     <span>Your music</span>
                   </CustomLink>
