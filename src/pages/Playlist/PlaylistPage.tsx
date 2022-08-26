@@ -19,7 +19,6 @@ const Playlist = () => {
         setLoading(true);
         if (id === 'me') {
           const { data: playlistInfo } = await api.getCurrentUserInfo('/tracks/?limit=50');
-          console.log(playlistInfo);
           setPlaylist({
             name: 'Liked tracks',
             owner: {
@@ -58,7 +57,7 @@ const Playlist = () => {
                 {playlist &&
                  playlist.tracks.items.length > 0
                   ? playlist.tracks.items.map((track: any, index: number) => <Track
-                track={track.track} index={index + 1} key={track.id} showImage={true} showAlbum={false} />
+                track={track.track} index={index + 1} key={track.track.id} showImage={true} showAlbum={false} />
                   )
                   : <InfoAlert message="Looks like there's no tracks on this playlist" />
                 }

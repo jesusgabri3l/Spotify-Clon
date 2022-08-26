@@ -12,7 +12,8 @@ export class UserStoreImpl {
       auth: observable,
       user: observable,
       setAuth: action,
-      setUser: action
+      setUser: action,
+      Logout: action
     });
     this.auth = auth;
     this.user = user;
@@ -26,6 +27,12 @@ export class UserStoreImpl {
 
   setUser (userResponse: User) {
     this.user = userResponse;
+  }
+
+  Logout () {
+    this.user = {};
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
   }
 
   getUserCountry () {

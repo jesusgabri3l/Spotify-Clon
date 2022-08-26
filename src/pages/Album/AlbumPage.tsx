@@ -9,7 +9,7 @@ const AlbumPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
   const [albumInfo, setAlbumInfo] = useState<any>();
 
   useEffect(() => {

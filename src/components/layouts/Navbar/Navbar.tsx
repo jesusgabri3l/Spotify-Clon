@@ -9,7 +9,10 @@ import userDefaultImg from '../../../assets/images/default-user.png';
 const Navbar = observer(({ UserStore }: PropsObserver) => {
   const [activeDropDown, setActiveDropdown] = useState<boolean>(false);
   const dropdownRef = useRef<any>(null);
-
+  const Logout = () => {
+    UserStore.Logout();
+    location.reload();
+  };
   useEffect(() => {
     document.addEventListener('click', (evt) => {
       if (dropdownRef.current!.contains(evt.target)) return;
@@ -60,7 +63,7 @@ const Navbar = observer(({ UserStore }: PropsObserver) => {
                 </ul>
                   {
                     UserStore.user.images && UserStore.user.display_name &&
-                    <button className="navigator__user element_wrapper" onClick={ () => setActiveDropdown(!activeDropDown)} ref={dropdownRef}> 
+                    <button className="navigator__user element_wrapper" onClick={ () => setActiveDropdown(!activeDropDown)} ref={dropdownRef}>
                         <img className="navigator__user__img" src={UserStore.user.images[0].url || userDefaultImg}/>
                         <p className="navigator__user__name text-lg ml-3">{UserStore.user.display_name}</p>
                         <i className="fa fa-angle-right ml-8"></i>
@@ -72,7 +75,7 @@ const Navbar = observer(({ UserStore }: PropsObserver) => {
                       <Link to="/" className="navigator__dropdown__list__button block p-3">Profile</Link>
                       </li>
                       <li className="navigator__dropdown__list__item w-full">
-                        <button className="navigator__dropdown__list__button block p-3 w-full text-left">Logout</button>
+                        <button className="navigator__dropdown__list__button block p-3 w-full text-left" onClick={Logout}>Logout</button>
                       </li>
                     </ul>
                   </div>
