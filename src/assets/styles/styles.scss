@@ -6,23 +6,4 @@
 @import "components/card"; 
 @import "components/header";
 @import "components/track";
-.hr{
-    opacity: 0.3;
-}
-*{
-    &::-webkit-scrollbar {
-        width: 8px;
-      }
-       
-      &::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: $BACKGROUND-COLOR;
-      }
-       
-      &::-webkit-scrollbar-thumb {
-        background-color: $GRAY-COLOR;
-        border: none;
-        outline: none;
-        border-radius: 16px;
-      }
-}
+
