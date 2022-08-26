@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import InfoAlert from '../../components/alerts/InfoAlert';
-import { Playlist as PlaylistModel} from '../../components/cards/Playlist/PlaylistModel';
+import { Playlist as PlaylistModel } from '../../components/cards/Playlist/PlaylistModel';
 import HeaderPlaylist from '../../components/layouts/Header/HeaderPlaylist';
 import Loader from '../../components/layouts/Loader';
 import Track from '../../components/layouts/Track/Track';
@@ -9,18 +9,32 @@ import api from '../../services/api';
 const Playlist = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [playlist, setPlaylist] = useState<PlaylistModel[]>();
+  const [playlist, setPlaylist] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const getPlayListInfo = async () => {
       try {
         setLoading(true);
-        const { data: playlistInfo } = await api.getPlaylistInfo(id as string);
-        setPlaylist(playlistInfo);
-        console.log(playlistInfo);
+        if (id === 'me') {
+          const { data: playlistInfo } = await api.getCurrentUserInfo('/tracks/?limit=50');
+          console.log(playlistInfo);
+          setPlaylist({
+            name: 'Liked tracks',
+            owner: {
+              display_name: 'Me'
+            },
+            images: [
+              { url: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png' }
+            ],
+            tracks: playlistInfo
+          });
+        } else {
+          const { data: playlistInfo } = await api.getPlaylistInfo(id as string);
+          setPlaylist(playlistInfo);
+        }
       } catch (err: any) {
-        if (err.response.status === 400 || err.response.status === 404) navigate('/');
+        if ((err.response.status === 400 || err.response.status === 404) && id === 'me') navigate('/');
       } finally {
         setLoading(false);
       }

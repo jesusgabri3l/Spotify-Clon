@@ -40,6 +40,12 @@ const Navbar = observer(({ UserStore }: PropsObserver) => {
               </ul>
                 <hr className="hr" />
                 <ul className="overflow-auto h-3/5 pt-6">
+                    <li
+                    className="mb-6 block text-sm text-gray-400 hover:underline hover:text-white"
+                    key="me"
+                    >
+                      <Link to="/playlist/me">Tracks you like</Link>
+                    </li>
                   {
                     UserStore.user.playlists &&
                     UserStore.user.playlists.length > 0

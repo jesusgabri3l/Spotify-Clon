@@ -12,7 +12,7 @@ export interface Playlist {
     primary_color?: string;
     public?: boolean;
     snapshot_id?: string;
-    tracks?: any;
+    tracks?: any[];
     type?: string;
     uri?: string;
 }
