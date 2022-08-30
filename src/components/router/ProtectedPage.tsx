@@ -1,16 +1,14 @@
+import { ReactElement } from 'react';
 import { UserStoreImpl } from '../../store/UserStore';
 import { observer } from 'mobx-react';
 import { useLocation, Navigate } from 'react-router-dom';
-
 interface Props {
   UserStore: UserStoreImpl;
-  // eslint-disable-next-line no-undef
-  children: JSX.Element
+  children: ReactElement;
 }
-const ProtectedPage = observer(({ UserStore, children }: Props) => {
+const ProtectedPage = observer(({ UserStore, children }: Props): ReactElement => {
   const location = useLocation();
   if (!UserStore.user.id) return <Navigate to="/" state={{ from: location }} replace />;
-
   return children;
 });
 

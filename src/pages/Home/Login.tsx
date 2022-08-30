@@ -1,7 +1,8 @@
+import { ReactElement } from 'react';
 import auth from '../../services/auth';
 import illustration from '../../assets/images/home_illustration.svg';
 
-const Login = () => {
+const Login = (): ReactElement => {
   const sendRequestToSpotify = ():void => auth.sendRequestToAuth();
   return (
     <div className='w-screen h-screen flex flex-col justify-center items-center p-0 md:p-20 lg:p-5'>

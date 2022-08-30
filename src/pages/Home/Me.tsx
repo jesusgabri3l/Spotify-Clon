@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { User } from '../../store/UserStoreModels';
 import api from '../../services/api';
 import Loader from '../../components/layouts/Loader';
@@ -13,7 +13,7 @@ import SectionFlex from '../../components/layouts/SectionFlex';
 import InfoAlert from '../../components/alerts/InfoAlert';
 import ErrorAlert from '../../components/alerts/ErrorAlert';
 
-const Me = ({ user }: {user: User}) => {
+const Me = ({ user }: {user: User}): ReactElement => {
   const [artists, setArtists] = useState<ArtistModel[]>([]);
   const [tracks, setTracks] = useState<TrackModel[]>([]);
   const [playlists, setPlaylists] = useState<PlaylistModel[]>([]);
@@ -50,38 +50,38 @@ const Me = ({ user }: {user: User}) => {
             ? <Loader />
             : !error
                 ? <div className="home__content px-6 md:px-12">
-            <SectionFlex title="Top artists this month">
-              {
-                artists.length > 0
-                  ? artists.map((artist: ArtistModel) => <Artist artist={artist} key={artist.id}/>)
-                  : <InfoAlert message='Looks like you have not listen to spotify for a quite ago'/>
-              }
-            </SectionFlex>
-          <section className="home__content__tracks mt-14">
-            <h3 className="home__content__title text-xl mb-2 font-bold mb-6 md:text-2xl">Top tracks this month</h3>
-            <div className="home__content__tracks__content mt-2">
-              {
-                tracks.length > 0
-                  ? tracks.map((track: TrackModel, index: number) => <Track track={track} index={index + 1} key={track.id}/>)
-                  : <InfoAlert message='Looks like you have not listen to spotify for a quite ago'/>
-              }
-            </div>
-          </section>
-          <SectionFlex title="Your playlists">
-              {
-                playlists.length > 0
-                  ? playlists.map((playlist: PlaylistModel) => <Playlist playlist = {playlist} key={playlist.id} />)
-                  : <InfoAlert message='Looks like you do not have a playlist yet'/>
-              }
-          </SectionFlex>
-          <SectionFlex title="Artists you follow">
-              {
-                followingArtists.length > 0
-                  ? followingArtists.map((artist: ArtistModel) => <Artist artist={artist} key={artist.id}/>)
-                  : <InfoAlert message='Looks like you are not following any artist yet' />
-              }
-          </SectionFlex>
-      </div>
+                    <SectionFlex title="Top artists this month">
+                      {
+                        artists.length > 0
+                          ? artists.map((artist: ArtistModel) => <Artist artist={artist} key={artist.id}/>)
+                          : <InfoAlert message='Looks like you have not listen to spotify for a quite ago'/>
+                      }
+                    </SectionFlex>
+                    <section className="home__content__tracks mt-14">
+                      <h3 className="home__content__title text-xl mb-2 font-bold mb-6 md:text-2xl">Top tracks this month</h3>
+                      <div className="home__content__tracks__content mt-2">
+                        {
+                          tracks.length > 0
+                            ? tracks.map((track: TrackModel, index: number) => <Track track={track} index={index + 1} key={track.id}/>)
+                            : <InfoAlert message='Looks like you have not listen to spotify for a quite ago'/>
+                        }
+                      </div>
+                    </section>
+                    <SectionFlex title="Your playlists">
+                        {
+                          playlists.length > 0
+                            ? playlists.map((playlist: PlaylistModel) => <Playlist playlist = {playlist} key={playlist.id} />)
+                            : <InfoAlert message='Looks like you do not have a playlist yet'/>
+                        }
+                    </SectionFlex>
+                    <SectionFlex title="Artists you follow">
+                        {
+                          followingArtists.length > 0
+                            ? followingArtists.map((artist: ArtistModel) => <Artist artist={artist} key={artist.id}/>)
+                            : <InfoAlert message='Looks like you are not following any artist yet' />
+                        }
+                    </SectionFlex>
+                  </div>
                 : <ErrorAlert />
         }
       </div>

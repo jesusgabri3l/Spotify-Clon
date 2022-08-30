@@ -1,7 +1,7 @@
 import { Image } from '../../../models/GlobalModels';
 export interface Artist {
     external_urls?: any;
-    followers?: {href: string; total: number};
+    followers?: {href?: string; total?: number};
     genres?: string[];
     href?:string;
     id?: string;

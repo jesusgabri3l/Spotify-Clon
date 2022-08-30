@@ -24,18 +24,20 @@ const ArtistPage = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+
   const followAnArtist = async () => {
     try {
       await api.putCurrentUserInfo(`/following/?ids=${id}&type=artist`);
-      setArtistInfo({ ...artistInfo, following: true, followers: { total: artistInfo.followers.total + 1 } });
+      setArtistInfo({ ...artistInfo, following: true, followers: { total: artistInfo?.followers?.total! + 1 } });
     } catch (e) {
       console.error(e);
     }
   };
+
   const unfollowAnArtist = async () => {
     try {
       await api.deleteCurrentUserInfo(`/following/?ids=${id}&type=artist`);
-      setArtistInfo({ ...artistInfo, following: false, followers: { total: artistInfo.followers.total - 1 } });
+      setArtistInfo({ ...artistInfo, following: false, followers: { total: artistInfo?.followers?.total! - 1 } });
     } catch (e) {
       console.error(e);
     }

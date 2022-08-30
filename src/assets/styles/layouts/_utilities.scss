@@ -17,8 +17,9 @@
     &::-webkit-scrollbar {
         width: 8px;
       }
-       
+      
       &::-webkit-scrollbar-track {
+        border-radius: 0.75rem;
         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         background-color: $BACKGROUND-COLOR;
       }

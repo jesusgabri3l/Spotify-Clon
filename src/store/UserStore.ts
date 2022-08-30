@@ -1,7 +1,7 @@
 import { makeObservable, observable, action } from 'mobx';
 import { Auth, User } from './UserStoreModels';
-const accessToken = localStorage.getItem('accessToken') || '';
-const refreshToken = localStorage.getItem('refreshToken') || '';
+const accessToken: string = localStorage.getItem('accessToken') || '';
+const refreshToken: string = localStorage.getItem('refreshToken') || '';
 
 export class UserStoreImpl {
   auth: Auth = {};
@@ -19,32 +19,32 @@ export class UserStoreImpl {
     this.user = user;
   }
 
-  setAuth (authResponse: Auth) {
+  setAuth (authResponse: Auth): void {
     this.auth = authResponse;
     localStorage.setItem('accessToken', authResponse.accessToken as string);
     localStorage.setItem('refreshToken', authResponse.refreshToken as string);
   }
 
-  setUser (userResponse: User) {
+  setUser (userResponse: User): void {
     this.user = userResponse;
   }
 
-  Logout () {
+  Logout (): void {
     this.user = {};
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
   }
 
-  getUserCountry () {
-    return this.user.country;
+  getUserCountry (): string {
+    return this.user.country!;
   }
 
-  getAccessToken () {
-    return this.auth.accessToken;
+  getAccessToken (): string {
+    return this.auth.accessToken!;
   }
 
-  getRefreshToken () {
-    return this.auth.refreshToken;
+  getRefreshToken (): string {
+    return this.auth.refreshToken!;
   }
 }
 

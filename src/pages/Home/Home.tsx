@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
-import { observer } from 'mobx-react';
-import { PropsObserver } from '../../models/GlobalModels';
-import api from '../../services/api';
+import { ReactElement, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { observer } from 'mobx-react';
+import api from '../../services/api';
+import Loader from '../../components/layouts/Loader';
 import Me from './Me';
 import Login from './Login';
-import Loader from '../../components/layouts/Loader';
+import { PropsObserver } from '../../models/GlobalModels';
+
 // styles at 'pages/home/_home.scss'
 
-const Home = observer(({ UserStore }: PropsObserver) => {
+const Home = observer(({ UserStore }: PropsObserver): ReactElement => {
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const location = useLocation();
+  const location: any = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const Home = observer(({ UserStore }: PropsObserver) => {
       setLoading(false);
     }
   }, [UserStore.user.id]);
-  const renderComponent = () => {
+  const renderComponent = (): ReactElement => {
     if (isLogged) return <Me user={UserStore.user} />;
     return <Login />;
   };

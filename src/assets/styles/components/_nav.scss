@@ -51,15 +51,16 @@
       justify-content: center;
       outline: none;
       border: none;
+      cursor: pointer;
       @media only screen and (max-width: $MD-DESKTOP) {
         top: 10px;
         height: 40px;
-        width: 180px;
-        left: calc(100vw - 250px);
+        width: 80px;
+        left: calc(100vw - 100px);
         border-radius: 32px;
       }
       @media only screen and (max-width: $M-PHONE) {
-        left: calc(100vw - 210px);
+        left: calc(100vw - 90px);
       }
       &__img{
         width: 32px;
@@ -88,8 +89,8 @@
       pointer-events: none;
       @media only screen and (max-width: $MD-DESKTOP) {
         top: 40px;
-        left: -50px;
-        height: 350px;
+        left: -150px;
+        height: 320px;
         width: 230px;
         display: block;
       }
@@ -100,7 +101,7 @@
         opacity: 1;
         left: 250px;
         @media only screen and (max-width: $MD-DESKTOP) {
-          left: -50px;
+          left: -150px;
           top: 50px;
         }
       }
