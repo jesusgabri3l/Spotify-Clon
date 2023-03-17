@@ -8,7 +8,7 @@ const Artist = ({ artist }: {artist: ArtistModel}) => {
   return (
     <div className="card card--artist py-6 px-4 justify-self-start" key={artist.id} onClick={() => navigate(`/artist/${artist.id}`)} >
       {
-        <img className="card__image card--artist__image" src={artist.images?.length > 0 ? artist.images[0].url : defaultUserImg } />
+        <img className="card__image card--artist__image" src={artist.images && artist.images?.length > 0 ? artist.images[0].url : defaultUserImg } />
       }
       <div className="">
         <p className="card__name block font-medium mt-4 text-sm truncate md:text-base">{artist.name}</p>

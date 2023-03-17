@@ -4,7 +4,7 @@ import querystring from 'query-string';
 import { TokenBody, RefreshTokenBody } from './AuthModels';
 import { UserStore } from '../store/UserStore';
 
-const AuthURL: string = import.meta.env.VITE_AUTH_SPOTIFY_URI as string;
+const AuthURL: string = import.meta.env.VITE_AUTH_SPOTIFY_URI;
 
 const clientID: string = import.meta.env.VITE_CLIENT_ID;
 const clientSecret: string = import.meta.env.VITE_CLIENT_SECRET;
